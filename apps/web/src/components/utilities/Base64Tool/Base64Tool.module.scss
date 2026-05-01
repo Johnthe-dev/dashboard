@@ -1,0 +1,225 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+  max-width: 1100px;
+}
+
+.heading {
+  color: var(--util-text);
+  font-family: $font-ui;
+  font-size: $text-xl;
+  font-weight: 700;
+}
+
+.description {
+  color: var(--util-text-muted);
+  font-family: $font-ui;
+  font-size: $text-sm;
+  margin-top: -$space-2;
+}
+
+.toolbar {
+  align-items: center;
+  display: flex;
+  gap: $space-4;
+}
+
+.modeToggle {
+  display: flex;
+  gap: 0;
+}
+
+.modeBtn {
+  background: var(--canvas-bg);
+  border: 1px solid var(--util-border);
+  color: var(--util-text-muted);
+  cursor: pointer;
+  font-family: $font-ui;
+  font-size: $text-sm;
+  font-weight: 500;
+  padding: $space-1 $space-3;
+  transition: background 0.1s, color 0.1s;
+
+  &:first-child { border-radius: $radius-sm 0 0 $radius-sm; }
+  &:last-child  { border-radius: 0 $radius-sm $radius-sm 0; border-left: none; }
+
+  &:focus-visible {
+    outline: 2px solid var(--util-accent);
+    outline-offset: 2px;
+  }
+}
+
+.modeBtnActive {
+  background: var(--util-accent);
+  border-color: var(--util-accent);
+  color: #fff;
+}
+
+.checkLabel {
+  align-items: center;
+  color: var(--util-text-muted);
+  cursor: pointer;
+  display: flex;
+  font-family: $font-ui;
+  font-size: $text-sm;
+  gap: $space-1;
+}
+
+.check {
+  accent-color: var(--util-accent);
+  cursor: pointer;
+}
+
+.panels {
+  align-items: stretch;
+  display: grid;
+  gap: $space-3;
+  grid-template-columns: 1fr auto 1fr;
+  min-height: 320px;
+}
+
+.panel {
+  border: 1px solid var(--util-border);
+  border-radius: $radius-md;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.panelHeader {
+  align-items: center;
+  background: var(--util-code-bg);
+  border-bottom: 1px solid var(--util-border);
+  display: flex;
+  flex-shrink: 0;
+  gap: $space-2;
+  padding: $space-2 $space-3;
+}
+
+.panelLabel {
+  color: var(--util-text-muted);
+  font-family: $font-ui;
+  font-size: $text-xs;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  margin-right: auto;
+  text-transform: uppercase;
+}
+
+.codeArea {
+  background: var(--canvas-bg);
+  border: none;
+  color: var(--util-text);
+  flex: 1;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  line-height: 1.6;
+  outline: none;
+  padding: $space-3;
+  resize: none;
+  width: 100%;
+
+  &::placeholder {
+    color: var(--util-text-muted);
+    opacity: 0.45;
+  }
+}
+
+.codeOutput {
+  background: var(--canvas-bg);
+  color: var(--util-text);
+  flex: 1;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  line-height: 1.6;
+  margin: 0;
+  overflow: auto;
+  padding: $space-3;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.placeholder {
+  color: var(--util-text-muted);
+  font-style: italic;
+  opacity: 0.45;
+}
+
+.errorText {
+  color: #dc2626;
+}
+
+.arrow {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  justify-content: center;
+}
+
+.runBtn {
+  background: var(--util-accent);
+  border: none;
+  border-radius: $radius-sm;
+  color: #fff;
+  cursor: pointer;
+  font-size: $text-lg;
+  height: 36px;
+  line-height: 1;
+  transition: opacity 0.1s;
+  width: 36px;
+
+  &:hover { opacity: 0.85; }
+
+  &:focus-visible {
+    outline: 2px solid var(--util-accent);
+    outline-offset: 2px;
+  }
+}
+
+.swapBtn {
+  background: none;
+  border: 1px solid var(--util-border);
+  border-radius: $radius-sm;
+  color: var(--util-text-muted);
+  cursor: pointer;
+  font-size: $text-base;
+  height: 30px;
+  line-height: 1;
+  transition: border-color 0.1s, color 0.1s;
+  width: 36px;
+
+  &:hover {
+    border-color: var(--util-accent);
+    color: var(--util-accent);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--util-accent);
+    outline-offset: 2px;
+  }
+}
+
+.btnGhost {
+  background: none;
+  border: none;
+  color: var(--util-text-muted);
+  cursor: pointer;
+  font-family: $font-ui;
+  font-size: $text-xs;
+  padding: 3px $space-2;
+  transition: color 0.1s;
+
+  &:hover { color: var(--util-text); }
+
+  &:focus-visible {
+    outline: 2px solid var(--util-accent);
+    outline-offset: 2px;
+  }
+}
+
+.bottomActions {
+  display: flex;
+  justify-content: flex-end;
+}

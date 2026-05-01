@@ -1,0 +1,136 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  height: 100%;
+  overflow: hidden;
+}
+
+.toolbar {
+  align-items: center;
+  display: flex;
+  flex-shrink: 0;
+  justify-content: space-between;
+}
+
+.count {
+  color: var(--module-text-muted);
+  font-size: $text-xs;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+
+.addBtn {
+  @include flat-button;
+  font-size: $text-lg;
+  line-height: 1;
+  padding: $space-1 $space-3;
+}
+
+// Scrollable note grid
+.grid {
+  display: grid;
+  flex: 1;
+  gap: $space-2;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  list-style: none;
+  overflow-y: auto;
+  @include module-scrollbar;
+  align-content: start;
+}
+
+// Individual sticky note card
+.card {
+  background: var(--module-header-bg);
+  border-radius: $radius-sm;
+  box-shadow: 1.5px 2px 0px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  min-height: 110px;
+  padding: $space-2;
+  position: relative;
+  transition: box-shadow 0.1s;
+
+  &:hover {
+    box-shadow: 2px 3px 0px rgba(0, 0, 0, 0.15);
+
+    .deleteBtn {
+      opacity: 1;
+    }
+  }
+}
+
+.deleteBtn {
+  background: none;
+  border: none;
+  color: var(--module-text-muted);
+  cursor: pointer;
+  font-size: $text-xs;
+  line-height: 1;
+  opacity: 0;
+  padding: 0;
+  position: absolute;
+  right: $space-1;
+  top: $space-1;
+  transition: opacity 0.1s, color 0.1s;
+
+  &:hover {
+    color: var(--module-text);
+  }
+
+  &:focus-visible {
+    opacity: 1;
+    outline: 2px solid var(--module-accent);
+    outline-offset: 2px;
+  }
+}
+
+.noteText {
+  background: none;
+  border: none;
+  color: var(--module-text);
+  flex: 1;
+  font-family: $font-ui;
+  font-size: $text-xs;
+  line-height: 1.55;
+  outline: none;
+  padding: 0;
+  padding-top: $space-2; // clear the delete button
+  resize: none;
+  width: 100%;
+
+  &::placeholder {
+    color: var(--module-text-muted);
+    opacity: 0.55;
+  }
+}
+
+// Empty state
+.empty {
+  align-items: center;
+  display: flex;
+  flex: 1;
+  justify-content: center;
+}
+
+.emptyPrompt {
+  background: none;
+  border: 1.5px dashed var(--module-border);
+  border-radius: $radius-sm;
+  color: var(--module-text-muted);
+  cursor: pointer;
+  font-family: $font-ui;
+  font-size: $text-sm;
+  padding: $space-3 $space-4;
+  transition: border-color 0.1s, color 0.1s;
+
+  &:hover {
+    border-color: var(--module-accent);
+    color: var(--module-accent);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--module-accent);
+    outline-offset: 2px;
+  }
+}

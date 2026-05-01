@@ -1,0 +1,159 @@
+// Full-screen click blocker — sits below the spotlight
+.overlay {
+  background: transparent;
+  inset: 0;
+  position: fixed;
+  z-index: 900;
+}
+
+// Spotlight: the enormous box-shadow creates the dimming around the target
+.spotlight {
+  border-radius: $radius-md;
+  box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.55);
+  pointer-events: none;
+  position: fixed;
+  z-index: 901;
+}
+
+// Tour dialog card
+.card {
+  background: var(--tour-card-bg);
+  border: 1.5px solid var(--tour-card-border);
+  border-radius: $radius-md;
+  box-shadow: 4px 5px 0px rgba(0, 0, 0, 0.35);
+  color: var(--tour-card-color);
+  font-family: $font-ui;
+  max-width: 280px;
+  padding: $space-4;
+  position: fixed;
+  width: 280px;
+  z-index: 902;
+}
+
+.stepCount {
+  color: var(--tour-card-muted);
+  font-size: $text-xs;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  margin-bottom: $space-2;
+  text-transform: uppercase;
+}
+
+.cardTitle {
+  color: var(--tour-card-color);
+  font-size: $text-base;
+  font-weight: 600;
+  margin-bottom: $space-2;
+}
+
+.cardBody {
+  color: var(--tour-card-color);
+  font-size: $text-sm;
+  line-height: 1.5;
+  opacity: 0.85;
+}
+
+.actions {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-top: $space-4;
+}
+
+.skipBtn {
+  background: none;
+  border: none;
+  color: var(--tour-btn-secondary-color);
+  cursor: pointer;
+  font-family: $font-ui;
+  font-size: $text-xs;
+  padding: 0;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+
+  &:focus-visible {
+    outline: 2px solid var(--tour-card-color);
+    outline-offset: 3px;
+  }
+}
+
+.navBtns {
+  display: flex;
+  gap: $space-2;
+}
+
+.prevBtn {
+  background: none;
+  border: 1.5px solid var(--tour-card-border);
+  border-radius: $radius-sm;
+  color: var(--tour-card-color);
+  cursor: pointer;
+  font-family: $font-ui;
+  font-size: $text-sm;
+  font-weight: 500;
+  padding: $space-1 $space-3;
+  transition: opacity 0.1s;
+
+  &:hover {
+    opacity: 0.75;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--tour-card-color);
+    outline-offset: 3px;
+  }
+}
+
+.nextBtn {
+  background: var(--tour-btn-primary-bg);
+  border: none;
+  border-radius: $radius-sm;
+  box-shadow: 2px 3px 0px rgba(0, 0, 0, 0.2);
+  color: var(--tour-btn-primary-color);
+  cursor: pointer;
+  font-family: $font-ui;
+  font-size: $text-sm;
+  font-weight: 600;
+  padding: $space-1 $space-3;
+  transition: opacity 0.1s;
+
+  &:hover {
+    opacity: 0.85;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--tour-card-color);
+    outline-offset: 3px;
+  }
+}
+
+// Persistent help button shown after tour is complete
+.helpBtn {
+  background: var(--canvas-bg);
+  border: 1.5px solid var(--tour-card-border);
+  border-radius: 50%;
+  bottom: 24px;
+  box-shadow: 2px 3px 0px rgba(0, 0, 0, 0.15);
+  color: var(--tour-card-muted);
+  cursor: pointer;
+  font-family: $font-ui;
+  font-size: $text-sm;
+  font-weight: 700;
+  height: 36px;
+  left: 24px;
+  line-height: 1;
+  position: fixed;
+  transition: color 0.1s, box-shadow 0.1s;
+  width: 36px;
+  z-index: 50;
+
+  &:hover {
+    box-shadow: 3px 4px 0px rgba(0, 0, 0, 0.2);
+    color: var(--tour-card-color);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--canvas-wordmark);
+    outline-offset: 3px;
+  }
+}

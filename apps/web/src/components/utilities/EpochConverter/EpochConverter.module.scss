@@ -1,0 +1,184 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+  max-width: 1000px;
+}
+
+.heading {
+  color: var(--util-text);
+  font-family: $font-ui;
+  font-size: $text-xl;
+  font-weight: 700;
+}
+
+.description {
+  color: var(--util-text-muted);
+  font-family: $font-ui;
+  font-size: $text-sm;
+  margin-top: -$space-2;
+}
+
+.mono {
+  font-family: $font-mono;
+}
+
+.grid {
+  display: grid;
+  gap: $space-4;
+  grid-template-columns: 1fr 1fr;
+}
+
+.card {
+  border: 1px solid var(--util-border);
+  border-radius: $radius-md;
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+  padding: $space-4;
+}
+
+.cardTitle {
+  color: var(--util-text);
+  font-family: $font-ui;
+  font-size: $text-base;
+  font-weight: 700;
+}
+
+.row {
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+}
+
+.label {
+  color: var(--util-text-muted);
+  font-family: $font-ui;
+  font-size: $text-xs;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.inputGroup {
+  align-items: center;
+  display: flex;
+  gap: $space-2;
+}
+
+.input {
+  background: var(--canvas-bg);
+  border: 1px solid var(--util-border);
+  border-radius: $radius-sm;
+  color: var(--util-text);
+  flex: 1;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  min-width: 0;
+  outline: none;
+  padding: $space-1 $space-2;
+  transition: border-color 0.1s;
+
+  &:focus {
+    border-color: var(--util-accent);
+  }
+
+  // Remove number input arrows
+  &[type='number'] {
+    appearance: textfield;
+    -moz-appearance: textfield;
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button { -webkit-appearance: none; }
+  }
+}
+
+.unitToggle {
+  display: flex;
+}
+
+.unitBtn {
+  background: var(--canvas-bg);
+  border: 1px solid var(--util-border);
+  color: var(--util-text-muted);
+  cursor: pointer;
+  font-family: $font-mono;
+  font-size: $text-xs;
+  font-weight: 600;
+  padding: $space-1 $space-2;
+  transition: background 0.1s, color 0.1s;
+
+  &:first-child { border-radius: $radius-sm 0 0 $radius-sm; }
+  &:last-child  { border-left: none; border-radius: 0 $radius-sm $radius-sm 0; }
+
+  &:focus-visible {
+    outline: 2px solid var(--util-accent);
+    outline-offset: 2px;
+  }
+}
+
+.unitBtnActive {
+  background: var(--util-accent);
+  border-color: var(--util-accent);
+  color: #fff;
+}
+
+.nowBtn {
+  background: none;
+  border: 1px solid var(--util-border);
+  border-radius: $radius-sm;
+  color: var(--util-text-muted);
+  cursor: pointer;
+  font-family: $font-ui;
+  font-size: $text-xs;
+  padding: $space-1 $space-2;
+  transition: border-color 0.1s, color 0.1s;
+  white-space: nowrap;
+
+  &:hover {
+    border-color: var(--util-accent);
+    color: var(--util-accent);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--util-accent);
+    outline-offset: 2px;
+  }
+}
+
+.results {
+  border-top: 1px solid var(--util-border);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-top: $space-3;
+}
+
+.resultRow {
+  align-items: baseline;
+  display: flex;
+  gap: $space-2;
+}
+
+.resultKey {
+  color: var(--util-text-muted);
+  flex-shrink: 0;
+  font-family: $font-ui;
+  font-size: $text-xs;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  min-width: 90px;
+  text-transform: uppercase;
+}
+
+.resultVal {
+  color: var(--util-text);
+  font-family: $font-mono;
+  font-size: $text-sm;
+  word-break: break-all;
+}
+
+.error {
+  color: #dc2626;
+  font-family: $font-ui;
+  font-size: $text-sm;
+}

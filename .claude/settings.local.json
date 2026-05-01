@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5173)",
+      "Bash(npx expo *)",
+      "Bash(npm install *)",
+      "Bash(npx tsc *)",
+      "Bash(rm -rf \"/home/puerh/Repos/Claude project/apps/native\")",
+      "Bash(rm -rf \"/home/puerh/Repos/Claude project/packages/persistence-native\")",
+      "Bash(./node_modules/.bin/tsc --noEmit)",
+      "Bash(echo \"Exit code: $?\")",
+      "Bash(node_modules/.bin/tsc --noEmit)"
+    ]
+  }
+}

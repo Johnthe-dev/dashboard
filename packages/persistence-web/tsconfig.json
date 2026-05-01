@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "paths": {
+      "@focal/logic": ["../../packages/logic/src"],
+      "@focal/logic/*": ["../../packages/logic/src/*"]
+    }
+  },
+  "include": ["src"]
+}

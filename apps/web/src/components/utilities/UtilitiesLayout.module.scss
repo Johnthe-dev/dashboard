@@ -1,0 +1,92 @@
+.root {
+  background: var(--canvas-bg);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.nav {
+  align-items: center;
+  background: var(--canvas-bg);
+  border-bottom: 1px solid var(--util-border);
+  box-shadow: 0 1px 0 var(--util-border);
+  display: flex;
+  flex-shrink: 0;
+  gap: $space-4;
+  padding: 0 $space-6;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.backLink {
+  color: var(--util-text-muted);
+  font-family: $font-ui;
+  font-size: $text-sm;
+  font-weight: 500;
+  padding: $space-3 0;
+  text-decoration: none;
+  transition: color 0.1s;
+  white-space: nowrap;
+
+  &:hover {
+    color: var(--util-text);
+  }
+
+  &:focus-visible {
+    color: var(--util-accent);
+    outline: 2px solid var(--util-accent);
+    outline-offset: 3px;
+  }
+}
+
+.title {
+  color: var(--util-text-muted);
+  font-family: $font-ui;
+  font-size: $text-xs;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  margin-right: auto;
+  text-transform: uppercase;
+}
+
+.tabs {
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+  // Hide scrollbar but keep functionality
+  scrollbar-width: none;
+  &::-webkit-scrollbar { display: none; }
+}
+
+.tab {
+  border-bottom: 2px solid transparent;
+  color: var(--util-text-muted);
+  font-family: $font-ui;
+  font-size: $text-sm;
+  font-weight: 500;
+  padding: $space-3 $space-4;
+  text-decoration: none;
+  transition: color 0.1s, border-color 0.1s;
+
+  &:hover {
+    color: var(--util-text);
+  }
+
+  &:focus-visible {
+    color: var(--util-accent);
+    outline: 2px solid var(--util-accent);
+    outline-offset: -2px;
+  }
+}
+
+.tabActive {
+  border-bottom-color: var(--util-accent);
+  color: var(--util-accent);
+}
+
+.main {
+  flex: 1;
+  overflow: auto;
+  padding: $space-6;
+}

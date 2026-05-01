@@ -1,0 +1,98 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+}
+
+.titleRow {
+  align-items: center;
+  display: flex;
+  flex-shrink: 0;
+  gap: $space-2;
+  margin-bottom: $space-3;
+}
+
+.titleDisplay {
+  background: none;
+  border: none;
+  border-bottom: 1.5px solid transparent;
+  border-radius: 0;
+  color: var(--module-text);
+  cursor: text;
+  flex: 1;
+  font-family: $font-ui;
+  font-size: $text-sm;
+  font-weight: 600;
+  padding: $space-1 0;
+  text-align: left;
+  transition: border-color 0.15s;
+
+  &:hover {
+    border-bottom-color: var(--module-border);
+  }
+}
+
+.titleInput {
+  @include underline-input;
+  flex: 1;
+  font-size: $text-sm;
+  font-weight: 600;
+}
+
+.monoToggle {
+  background: none;
+  border: 1.5px solid var(--module-border);
+  border-radius: $radius-sm;
+  color: var(--module-text-muted);
+  cursor: pointer;
+  flex-shrink: 0;
+  font-family: $font-mono;
+  font-size: $text-xs;
+  padding: 1px $space-2;
+  transition: border-color 0.1s, color 0.1s;
+
+  &:hover {
+    border-color: var(--module-accent);
+    color: var(--module-accent);
+  }
+}
+
+.monoActive {
+  border-color: var(--module-accent);
+  color: var(--module-accent);
+}
+
+.textarea {
+  background: transparent;
+  border: none;
+  color: var(--module-text);
+  flex: 1;
+  font-family: $font-ui;
+  font-size: $text-sm;
+  line-height: 1.6;
+  outline: none;
+  padding: 0;
+  resize: none;
+  width: 100%;
+  @include module-scrollbar;
+
+  &::placeholder {
+    color: var(--module-text-muted);
+    opacity: 0.6;
+  }
+}
+
+.mono {
+  font-family: $font-mono;
+}
+
+.charCount {
+  bottom: 0;
+  color: var(--module-text-muted);
+  font-size: $text-xs;
+  opacity: 0.5;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+}

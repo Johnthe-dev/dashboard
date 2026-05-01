@@ -1,0 +1,155 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+  height: 100%;
+}
+
+.addRow {
+  display: flex;
+  flex-shrink: 0;
+  gap: $space-2;
+}
+
+.input {
+  @include underline-input;
+  flex: 1;
+}
+
+.addBtn {
+  @include flat-button;
+  font-size: $text-lg;
+  line-height: 1;
+}
+
+.list {
+  flex: 1;
+  list-style: none;
+  overflow-y: auto;
+  @include module-scrollbar;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.item {
+  align-items: center;
+  border: 1.5px solid var(--module-border);
+  border-radius: $radius-sm;
+  display: flex;
+  gap: $space-2;
+  padding: $space-2;
+  transition: border-color 0.15s;
+
+  &:hover .deleteBtn {
+    opacity: 1;
+  }
+}
+
+.running {
+  border-color: var(--module-accent);
+}
+
+.playBtn {
+  align-items: center;
+  background: var(--module-input-bg);
+  border: 1.5px solid var(--module-border);
+  border-radius: $radius-sm;
+  color: var(--module-text-muted);
+  cursor: pointer;
+  display: flex;
+  flex-shrink: 0;
+  font-size: $text-sm;
+  height: 30px;
+  justify-content: center;
+  transition: background 0.1s, border-color 0.1s, color 0.1s;
+  width: 30px;
+
+  &:hover {
+    border-color: var(--module-accent);
+    color: var(--module-accent);
+  }
+}
+
+.playBtnActive {
+  background: var(--module-accent);
+  border-color: var(--module-accent);
+  color: #fff;
+}
+
+.info {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.nameBtn {
+  background: none;
+  border: none;
+  color: var(--module-text);
+  cursor: text;
+  font-family: $font-ui;
+  font-size: $text-sm;
+  font-weight: 500;
+  overflow: hidden;
+  padding: 0;
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.nameInput {
+  @include underline-input;
+  font-size: $text-sm;
+  font-weight: 500;
+}
+
+.elapsed {
+  color: var(--module-text-muted);
+  font-family: $font-mono;
+  font-size: $text-xs;
+  transition: color 0.15s;
+}
+
+.elapsedRunning {
+  color: var(--module-accent);
+}
+
+.deleteBtn {
+  background: none;
+  border: none;
+  color: var(--module-text-muted);
+  cursor: pointer;
+  flex-shrink: 0;
+  font-size: $text-xs;
+  opacity: 0;
+  padding: 2px 4px;
+  transition: opacity 0.1s;
+}
+
+.footer {
+  align-items: center;
+  border-top: 1.5px solid var(--module-border);
+  display: flex;
+  flex-shrink: 0;
+  justify-content: space-between;
+  padding-top: $space-2;
+}
+
+.totalLabel {
+  color: var(--module-text-muted);
+  font-size: $text-xs;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.totalTime {
+  color: var(--module-text);
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 600;
+}

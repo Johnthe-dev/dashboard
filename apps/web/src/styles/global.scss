@@ -1,0 +1,112 @@
+@import 'variables';
+@import 'themes';
+
+:root {
+  --text-xs: 11px;
+  --text-sm: 13px;
+  --text-base: 15px;
+  --text-lg: 18px;
+  --text-xl: 22px;
+
+  --canvas-bg: #e8e4dc;
+  --canvas-dot: rgba(0, 0, 0, 0.08);
+  --canvas-wordmark: rgba(0, 0, 0, 0.25);
+
+  --shadow-module: 3px 4px 0px rgba(0, 0, 0, 0.18);
+  --shadow-module-hover: 5px 6px 0px rgba(0, 0, 0, 0.22);
+
+  --fab-s-active-bg: #2b2d31;
+  --fab-s-active-border: #2b2d31;
+  --fab-s-active-color: #e0e2e8;
+  --fab-s-active-bg-hover: #3d4045;
+
+  --tour-card-bg: #2b2d31;
+  --tour-card-color: #e0e2e8;
+  --tour-card-border: #3d4045;
+  --tour-card-muted: rgba(224, 226, 232, 0.55);
+  --tour-btn-primary-bg: #e0e2e8;
+  --tour-btn-primary-color: #2b2d31;
+  --tour-btn-secondary-color: rgba(224, 226, 232, 0.65);
+
+  --util-accent: #2563eb;
+  --util-accent-subtle: rgba(37, 99, 235, 0.1);
+  --util-text: #1e1f22;
+  --util-text-muted: rgba(30, 31, 34, 0.55);
+  --util-border: rgba(30, 31, 34, 0.15);
+  --util-surface: rgba(255, 255, 255, 0.6);
+  --util-code-bg: rgba(30, 31, 34, 0.05);
+}
+
+:root.dark-mode {
+  --canvas-bg: #1e1f22;
+  --canvas-dot: rgba(255, 255, 255, 0.05);
+  --canvas-wordmark: rgba(255, 255, 255, 0.2);
+
+  --shadow-module: 0 0 0 1px rgba(255, 255, 255, 0.07), 3px 4px 0px rgba(0, 0, 0, 0.4);
+  --shadow-module-hover: 0 0 0 1px rgba(255, 255, 255, 0.1), 5px 6px 0px rgba(0, 0, 0, 0.5);
+
+  --fab-s-active-bg: #d8d4cc;
+  --fab-s-active-border: #d8d4cc;
+  --fab-s-active-color: #2b2d31;
+  --fab-s-active-bg-hover: #c8c4bb;
+
+  --tour-card-bg: #e8e4dc;
+  --tour-card-color: #2b2d31;
+  --tour-card-border: #c8c4bb;
+  --tour-card-muted: rgba(43, 45, 49, 0.55);
+  --tour-btn-primary-bg: #2b2d31;
+  --tour-btn-primary-color: #e0e2e8;
+  --tour-btn-secondary-color: rgba(43, 45, 49, 0.6);
+
+  --util-accent: #60a5fa;
+  --util-accent-subtle: rgba(96, 165, 250, 0.12);
+  --util-text: #e0e2e8;
+  --util-text-muted: rgba(224, 226, 232, 0.55);
+  --util-border: rgba(224, 226, 232, 0.15);
+  --util-surface: rgba(255, 255, 255, 0.05);
+  --util-code-bg: rgba(255, 255, 255, 0.06);
+}
+
+.large-text {
+  --text-xs: 14px;
+  --text-sm: 17px;
+  --text-base: 20px;
+  --text-lg: 24px;
+  --text-xl: 30px;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=DM+Mono&display=swap');
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  background-color: var(--canvas-bg);
+  background-image: radial-gradient(circle, var(--canvas-dot) 1px, transparent 1px);
+  background-size: 24px 24px;
+  font-family: $font-ui;
+  font-size: $text-base;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+button {
+  cursor: pointer;
+}
+
+textarea,
+input {
+  font-family: $font-ui;
+}

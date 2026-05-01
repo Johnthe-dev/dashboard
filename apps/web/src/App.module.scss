@@ -1,0 +1,235 @@
+.app {
+  min-height: 100vh;
+  position: relative;
+  width: 100%;
+}
+
+.wordmark {
+  align-items: center;
+  color: var(--canvas-wordmark);
+  display: flex;
+  font-size: $text-sm;
+  font-weight: 600;
+  gap: $space-3;
+  left: 24px;
+  letter-spacing: 0.1em;
+  pointer-events: none;
+  position: fixed;
+  text-transform: uppercase;
+  top: 14px;
+  z-index: 10;
+}
+
+.devToolsLink {
+  color: var(--canvas-wordmark);
+  font-size: $text-xs;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  opacity: 0.6;
+  pointer-events: auto;
+  text-decoration: none;
+  transition: opacity 0.1s;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  &:focus-visible {
+    opacity: 1;
+    outline: 2px solid var(--canvas-wordmark);
+    outline-offset: 3px;
+  }
+}
+
+.fabGroup {
+  align-items: center;
+  bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: fixed;
+  right: 24px;
+  z-index: 50;
+}
+
+.fab {
+  align-items: center;
+  background: #2b2d31;
+  border: none;
+  border-radius: 50%;
+  box-shadow: 3px 4px 0px rgba(0, 0, 0, 0.3);
+  color: #e0e2e8;
+  cursor: pointer;
+  display: flex;
+  font-size: 24px;
+  font-weight: 300;
+  height: 52px;
+  justify-content: center;
+  line-height: 1;
+  transition: background 0.15s, box-shadow 0.15s, transform 0.1s;
+  width: 52px;
+
+  &:hover {
+    background: #3d4045;
+    box-shadow: 5px 6px 0px rgba(0, 0, 0, 0.3);
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  &:focus-visible {
+    outline: 3px solid #e0e2e8;
+    outline-offset: 3px;
+  }
+}
+
+.fabSecondary {
+  align-items: center;
+  background: #e8e4dc;
+  border: 2px solid #c8c4bb;
+  border-radius: 50%;
+  box-shadow: 2px 3px 0px rgba(0, 0, 0, 0.15);
+  color: #5a5550;
+  cursor: pointer;
+  display: flex;
+  font-family: $font-ui;
+  font-size: 13px;
+  font-weight: 700;
+  height: 40px;
+  justify-content: center;
+  letter-spacing: 0.02em;
+  transition: background 0.15s, box-shadow 0.15s, transform 0.1s, color 0.15s;
+  width: 40px;
+
+  &:hover {
+    background: #d8d4cc;
+    box-shadow: 3px 4px 0px rgba(0, 0, 0, 0.18);
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  &:focus-visible {
+    outline: 3px solid #2b2d31;
+    outline-offset: 3px;
+  }
+}
+
+// Small split-swatch circle shown inside the global theme button
+.fabThemeSwatch {
+  background: linear-gradient(135deg, #fff176 50%, #1e2023 50%);
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);
+  display: block;
+  height: 16px;
+  pointer-events: none;
+  width: 16px;
+}
+
+// Floating panel of theme swatches that opens above the FAB stack
+.globalThemePanel {
+  background: var(--canvas-bg);
+  border: 1.5px solid var(--tour-card-border);
+  border-radius: $radius-md;
+  bottom: 88px; // 24px margin + 52px main FAB + 12px gap
+  box-shadow: $shadow-module;
+  display: grid;
+  gap: $space-2;
+  grid-template-columns: repeat(4, 32px);
+  padding: $space-2;
+  position: fixed;
+  right: 24px;
+  z-index: 55;
+}
+
+.globalThemeDot {
+  border: none;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1.5px rgba(0, 0, 0, 0.25), 1px 1.5px 0px rgba(0, 0, 0, 0.18);
+  cursor: pointer;
+  height: 32px;
+  padding: 0;
+  transition: transform 0.1s, box-shadow 0.1s;
+  width: 32px;
+
+  &:hover {
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.35), 2px 3px 0px rgba(0, 0, 0, 0.25);
+    transform: scale(1.18);
+  }
+
+  &:focus-visible {
+    outline: 3px solid var(--canvas-wordmark);
+    outline-offset: 3px;
+  }
+}
+
+.fabSecondaryActive {
+  background: var(--fab-s-active-bg);
+  border-color: var(--fab-s-active-border);
+  box-shadow: 3px 4px 0px rgba(0, 0, 0, 0.3);
+  color: var(--fab-s-active-color);
+
+  &:hover {
+    background: var(--fab-s-active-bg-hover);
+  }
+}
+
+// Export / import settings panel — same z-index/position pattern as globalThemePanel
+.settingsPanel {
+  background: var(--canvas-bg);
+  border: 1.5px solid var(--tour-card-border);
+  border-radius: $radius-md;
+  bottom: 88px; // 24px margin + 52px main FAB + 12px gap
+  box-shadow: $shadow-module;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  padding: $space-2;
+  position: fixed;
+  right: 24px;
+  width: 160px;
+  z-index: 55;
+}
+
+// Full-width text buttons inside the settings panel
+.settingsBtn {
+  background: var(--canvas-bg);
+  border: 1.5px solid var(--tour-card-border);
+  border-radius: $radius-sm;
+  color: var(--canvas-wordmark);
+  cursor: pointer;
+  font-family: $font-ui;
+  font-size: $text-sm;
+  font-weight: 600;
+  padding: $space-2 $space-3;
+  text-align: center;
+  transition: background 0.12s, color 0.12s, border-color 0.12s;
+  width: 100%;
+
+  &:hover {
+    background: var(--tour-card-bg);
+    border-color: var(--tour-card-bg);
+    color: var(--tour-card-color);
+  }
+
+  &:focus-visible {
+    outline: 3px solid var(--tour-card-bg);
+    outline-offset: 3px;
+  }
+}
+
+// Visually hidden file input for import
+.fileInputHidden {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}

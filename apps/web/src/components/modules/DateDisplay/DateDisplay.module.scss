@@ -1,0 +1,37 @@
+.root {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+}
+
+.inner {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+  user-select: none;
+}
+
+.dayOfWeek {
+  color: var(--module-text-muted);
+  font-size: $text-sm;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.date {
+  color: var(--module-text);
+  font-size: clamp(48px, 10cqw, 96px);
+  font-weight: 700;
+  line-height: 1;
+}
+
+.month {
+  color: var(--module-accent);
+  font-size: $text-lg;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
