@@ -1,9 +1,11 @@
 import React, { useRef, useEffect, useState } from 'react'
 import { useCountdownTimer } from '@focal/logic'
+import type { ThemeId } from '@focal/logic'
 import styles from './CountdownTimer.module.scss'
 
 interface CountdownTimerProps {
   moduleId: string
+  themeId: ThemeId
 }
 
 function formatTime(ms: number): string {
@@ -13,7 +15,7 @@ function formatTime(ms: number): string {
   return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`
 }
 
-export function CountdownTimer({ moduleId }: CountdownTimerProps) {
+export function CountdownTimer({ moduleId, themeId }: CountdownTimerProps) {
   const { durationMs, remainingMs, status, start, pause, reset, setDuration } =
     useCountdownTimer(moduleId)
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -97,7 +99,7 @@ export function CountdownTimer({ moduleId }: CountdownTimerProps) {
     ctx.textAlign = 'center'
     ctx.textBaseline = 'middle'
     ctx.fillText(formatTime(remainingMs), cx, cy)
-  }, [remainingMs, durationMs, status])
+  }, [remainingMs, durationMs, status, themeId])
 
   const handleDurationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = parseInt(e.target.value, 10)

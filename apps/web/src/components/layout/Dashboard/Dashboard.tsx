@@ -30,7 +30,7 @@ interface DashboardProps {
 
 function renderModule(item: GridItem) {
   switch (item.kind) {
-    case 'countdown-timer': return <CountdownTimer moduleId={item.i} />
+    case 'countdown-timer': return <CountdownTimer moduleId={item.i} themeId={item.themeId} />
     case 'todo-list':       return <TodoList moduleId={item.i} />
     case 'note-pad':        return <NotePad moduleId={item.i} />
     case 'project-tracker': return <ProjectTracker moduleId={item.i} />
