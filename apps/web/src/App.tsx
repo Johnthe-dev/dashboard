@@ -13,6 +13,7 @@ export default function App() {
   const [pickerOpen, setPickerOpen] = useState(false)
   const [themePickerOpen, setThemePickerOpen] = useState(false)
   const [settingsOpen, setSettingsOpen] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
   const [largeText, setLargeText] = useState(() => localStorage.getItem('focal-large-text') === 'true')
   const [darkMode, setDarkMode] = useState(() => localStorage.getItem('focal-dark-mode') === 'true')
   const themePanelRef = useRef<HTMLDivElement>(null)
@@ -20,6 +21,8 @@ export default function App() {
   const settingsPanelRef = useRef<HTMLDivElement>(null)
   const settingsBtnRef = useRef<HTMLButtonElement>(null)
   const fileInputRef = useRef<HTMLInputElement>(null)
+  const fabGroupRef = useRef<HTMLDivElement>(null)
+  const mobileMenuRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     document.documentElement.classList.toggle('dark-mode', darkMode)
@@ -52,6 +55,28 @@ export default function App() {
     document.addEventListener('mousedown', handler)
     return () => document.removeEventListener('mousedown', handler)
   }, [settingsOpen])
+
+  // Close hamburger menu when tapping outside the fab group or mobile menu panel
+  useEffect(() => {
+    if (!menuOpen) return
+    const handler = (e: MouseEvent) => {
+      if (
+        !fabGroupRef.current?.contains(e.target as Node) &&
+        !mobileMenuRef.current?.contains(e.target as Node)
+      ) {
+        setMenuOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handler)
+    return () => document.removeEventListener('mousedown', handler)
+  }, [menuOpen])
+
+  // Close hamburger menu if viewport grows past mobile breakpoint
+  useEffect(() => {
+    const close = () => { if (window.innerWidth > 767) setMenuOpen(false) }
+    window.addEventListener('resize', close)
+    return () => window.removeEventListener('resize', close)
+  }, [])
 
   const handleImportFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
@@ -104,6 +129,54 @@ export default function App() {
       )}
 
       <Walkthrough />
+
+      {/* Mobile menu panel — shown when hamburger is open */}
+      {menuOpen && (
+        <div ref={mobileMenuRef} className={styles.mobileMenu} role="menu" aria-label="Controls">
+          <button
+            className={`${styles.mobileMenuItem}${settingsOpen ? ` ${styles.mobileMenuItemActive}` : ''}`}
+            onClick={() => { setSettingsOpen((v) => !v); setMenuOpen(false) }}
+            role="menuitem"
+          >
+            <span className={styles.mobileMenuLabel}>Export / Import</span>
+            <span className={styles.mobileMenuIcon}>⋯</span>
+          </button>
+          <button
+            className={`${styles.mobileMenuItem}${themePickerOpen ? ` ${styles.mobileMenuItemActive}` : ''}`}
+            onClick={() => { setThemePickerOpen((v) => !v); setMenuOpen(false) }}
+            role="menuitem"
+          >
+            <span className={styles.mobileMenuLabel}>All Themes</span>
+            <span className={styles.fabThemeSwatch} aria-hidden="true" />
+          </button>
+          <button
+            className={`${styles.mobileMenuItem}${darkMode ? ` ${styles.mobileMenuItemActive}` : ''}`}
+            onClick={toggleDarkMode}
+            role="menuitem"
+            aria-pressed={darkMode}
+          >
+            <span className={styles.mobileMenuLabel}>Dark Mode</span>
+            <span className={styles.mobileMenuIcon}>◑</span>
+          </button>
+          <button
+            className={`${styles.mobileMenuItem}${largeText ? ` ${styles.mobileMenuItemActive}` : ''}`}
+            onClick={toggleLargeText}
+            role="menuitem"
+            aria-pressed={largeText}
+          >
+            <span className={styles.mobileMenuLabel}>Large Text</span>
+            <span className={styles.mobileMenuIcon}>Aa</span>
+          </button>
+          <button
+            className={`${styles.mobileMenuItem}${pickerOpen ? ` ${styles.mobileMenuItemActive}` : ''}`}
+            onClick={() => { setPickerOpen((v) => !v); setMenuOpen(false) }}
+            role="menuitem"
+          >
+            <span className={styles.mobileMenuLabel}>Add Module</span>
+            <span className={styles.mobileMenuIcon}>{pickerOpen ? '✕' : '+'}</span>
+          </button>
+        </div>
+      )}
 
       {themePickerOpen && (
         <div
@@ -162,49 +235,65 @@ export default function App() {
         </div>
       )}
 
-      <div className={styles.fabGroup}>
+      <div ref={fabGroupRef} className={styles.fabGroup}>
+        {/* Desktop: labelled FAB items — label slides in on hover */}
+        <div className={styles.fabItem}>
+          <span className={styles.fabLabel}>Export / Import</span>
+          <button
+            ref={settingsBtnRef}
+            className={`${styles.fabSecondary}${settingsOpen ? ` ${styles.fabSecondaryActive}` : ''}`}
+            onClick={() => setSettingsOpen((v) => !v)}
+            aria-label={settingsOpen ? 'Close settings' : 'Open export / import settings'}
+            aria-expanded={settingsOpen}
+          >⋯</button>
+        </div>
+        <div className={styles.fabItem}>
+          <span className={styles.fabLabel}>All Themes</span>
+          <button
+            ref={themeBtnRef}
+            className={`${styles.fabSecondary}${themePickerOpen ? ` ${styles.fabSecondaryActive}` : ''}`}
+            onClick={() => setThemePickerOpen((v) => !v)}
+            aria-label={themePickerOpen ? 'Close theme picker' : 'Set theme for all modules'}
+            aria-expanded={themePickerOpen}
+          >
+            <span className={styles.fabThemeSwatch} aria-hidden="true" />
+          </button>
+        </div>
+        <div className={styles.fabItem}>
+          <span className={styles.fabLabel}>Dark Mode</span>
+          <button
+            className={`${styles.fabSecondary}${darkMode ? ` ${styles.fabSecondaryActive}` : ''}`}
+            onClick={toggleDarkMode}
+            aria-label={darkMode ? 'Disable dark mode' : 'Enable dark mode'}
+            aria-pressed={darkMode}
+          >◑</button>
+        </div>
+        <div className={styles.fabItem}>
+          <span className={styles.fabLabel}>Large Text</span>
+          <button
+            className={`${styles.fabSecondary}${largeText ? ` ${styles.fabSecondaryActive}` : ''}`}
+            onClick={toggleLargeText}
+            aria-label={largeText ? 'Disable large text' : 'Enable large text'}
+            aria-pressed={largeText}
+          >Aa</button>
+        </div>
+        <div className={styles.fabItem}>
+          <span className={styles.fabLabel}>Add Module</span>
+          <button
+            className={styles.fab}
+            onClick={() => setPickerOpen((v) => !v)}
+            aria-label="Add module"
+            aria-expanded={pickerOpen}
+          >{pickerOpen ? '✕' : '+'}</button>
+        </div>
+
+        {/* Hamburger — mobile only (≤767px), opens the mobile menu panel */}
         <button
-          ref={settingsBtnRef}
-          className={`${styles.fabSecondary}${settingsOpen ? ` ${styles.fabSecondaryActive}` : ''}`}
-          onClick={() => setSettingsOpen((v) => !v)}
-          aria-label={settingsOpen ? 'Close settings' : 'Open export / import settings'}
-          aria-expanded={settingsOpen}
-        >
-          ⋯
-        </button>
-        <button
-          ref={themeBtnRef}
-          className={`${styles.fabSecondary}${themePickerOpen ? ` ${styles.fabSecondaryActive}` : ''}`}
-          onClick={() => setThemePickerOpen((v) => !v)}
-          aria-label={themePickerOpen ? 'Close theme picker' : 'Set theme for all modules'}
-          aria-expanded={themePickerOpen}
-        >
-          <span className={styles.fabThemeSwatch} aria-hidden="true" />
-        </button>
-        <button
-          className={`${styles.fabSecondary}${darkMode ? ` ${styles.fabSecondaryActive}` : ''}`}
-          onClick={toggleDarkMode}
-          aria-label={darkMode ? 'Disable dark mode' : 'Enable dark mode'}
-          aria-pressed={darkMode}
-        >
-          ◑
-        </button>
-        <button
-          className={`${styles.fabSecondary}${largeText ? ` ${styles.fabSecondaryActive}` : ''}`}
-          onClick={toggleLargeText}
-          aria-label={largeText ? 'Disable large text' : 'Enable large text'}
-          aria-pressed={largeText}
-        >
-          Aa
-        </button>
-        <button
-          className={styles.fab}
-          onClick={() => setPickerOpen((v) => !v)}
-          aria-label="Add module"
-          aria-expanded={pickerOpen}
-        >
-          {pickerOpen ? '✕' : '+'}
-        </button>
+          className={styles.hamburgerBtn}
+          onClick={() => setMenuOpen((v) => !v)}
+          aria-label={menuOpen ? 'Close controls' : 'Open controls'}
+          aria-expanded={menuOpen}
+        >{menuOpen ? '✕' : '☰'}</button>
       </div>
     </div>
   )

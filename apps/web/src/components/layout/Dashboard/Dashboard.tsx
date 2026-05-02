@@ -1,3 +1,4 @@
+import { useMemo } from 'react'
 import { Responsive, useContainerWidth } from 'react-grid-layout'
 import type { LayoutItem, ResponsiveLayouts } from 'react-grid-layout'
 import 'react-grid-layout/css/styles.css'
@@ -48,10 +49,25 @@ function renderModule(item: GridItem) {
 export function Dashboard({ items, onLayoutChange, onRemove, onThemeChange }: DashboardProps) {
   const { width, containerRef } = useContainerWidth()
 
-  const layouts: ResponsiveLayouts = { lg: items, md: items, sm: items }
+  // Auto-stack all modules in a single full-width column for the sm breakpoint.
+  // Desktop positions (lg/md) are preserved; only lg is ever persisted.
+  const smLayout = useMemo(() => {
+    let y = 0
+    return [...items]
+      .sort((a, b) => (a.y !== b.y ? a.y - b.y : a.x - b.x))
+      .map((item) => {
+        const h = Math.max(item.h, item.minH ?? 2)
+        const entry = { i: item.i, x: 0, y, w: COLS.sm, h, minW: 1, minH: item.minH ?? 2 }
+        y += h
+        return entry
+      })
+  }, [items])
+
+  const layouts: ResponsiveLayouts = { lg: items, md: items, sm: smLayout }
 
   const handleLayoutChange = (_layout: readonly LayoutItem[], allLayouts: ResponsiveLayouts) => {
-    const lg = allLayouts.lg ?? []
+    const lg = allLayouts.lg
+    if (!lg?.length) return
     const positions: PositionUpdate[] = lg.map((l) => ({
       i: l.i, x: l.x, y: l.y, w: l.w, h: l.h,
     }))
@@ -70,7 +86,7 @@ export function Dashboard({ items, onLayoutChange, onRemove, onThemeChange }: Da
         margin={MARGIN}
         containerPadding={CONTAINER_PADDING}
         onLayoutChange={handleLayoutChange}
-        dragConfig={{ handle: '.dragHandle', enabled: true, bounded: false, threshold: 3 }}
+        dragConfig={{ handle: '.dragHandle', cancel: 'button, input, textarea, select, a', enabled: true, bounded: false, threshold: 3 }}
         resizeConfig={{ enabled: true, handles: ['se'] }}
       >
         {items.map((item) => (

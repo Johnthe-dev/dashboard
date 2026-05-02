@@ -42,7 +42,7 @@
 }
 
 .fabGroup {
-  align-items: center;
+  align-items: flex-end;
   bottom: 24px;
   display: flex;
   flex-direction: column;
@@ -50,6 +50,120 @@
   position: fixed;
   right: 24px;
   z-index: 50;
+}
+
+// Wraps each desktop button + its hover label
+.fabItem {
+  align-items: center;
+  display: flex;
+  gap: $space-2;
+}
+
+// Hover label — slides in from the right
+.fabLabel {
+  background: var(--tour-card-bg);
+  border-radius: $radius-sm;
+  box-shadow: 2px 3px 0px rgba(0, 0, 0, 0.22);
+  color: var(--tour-card-color);
+  font-family: $font-ui;
+  font-size: $text-xs;
+  font-weight: 600;
+  opacity: 0;
+  padding: 4px $space-2;
+  pointer-events: none;
+  transform: translateX(6px);
+  transition: opacity 0.15s, transform 0.15s;
+  white-space: nowrap;
+
+  .fabItem:hover & {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+// Hamburger button — hidden above 767px, visible on mobile
+.hamburgerBtn {
+  align-items: center;
+  background: #2b2d31;
+  border: none;
+  border-radius: 50%;
+  box-shadow: 3px 4px 0px rgba(0, 0, 0, 0.3);
+  color: #e0e2e8;
+  cursor: pointer;
+  display: none;
+  font-size: 20px;
+  height: 52px;
+  justify-content: center;
+  line-height: 1;
+  transition: background 0.15s, transform 0.1s;
+  width: 52px;
+
+  &:hover { background: #3d4045; }
+  &:active { transform: scale(0.94); }
+
+  &:focus-visible {
+    outline: 3px solid #e0e2e8;
+    outline-offset: 3px;
+  }
+}
+
+// ≤767px: hide desktop items, show hamburger only
+@media (max-width: 767px) {
+  .fabItem { display: none; }
+  .hamburgerBtn { display: flex; }
+}
+
+// Mobile menu panel — floats above the hamburger
+.mobileMenu {
+  background: var(--canvas-bg);
+  border: 1.5px solid var(--tour-card-border);
+  border-radius: $radius-md;
+  bottom: 86px; // 24px margin + 52px hamburger + 10px gap
+  box-shadow: $shadow-module;
+  min-width: 210px;
+  overflow: hidden;
+  position: fixed;
+  right: 24px;
+  z-index: 56;
+}
+
+// Each row in the mobile menu
+.mobileMenuItem {
+  align-items: center;
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--tour-card-border);
+  color: var(--canvas-wordmark);
+  cursor: pointer;
+  display: flex;
+  font-family: $font-ui;
+  font-size: $text-sm;
+  font-weight: 500;
+  justify-content: space-between;
+  padding: $space-3 $space-4;
+  transition: background 0.1s;
+  width: 100%;
+
+  &:last-child { border-bottom: none; }
+  &:hover { background: var(--util-code-bg); }
+
+  &:focus-visible {
+    outline: 2px solid var(--canvas-wordmark);
+    outline-offset: -2px;
+  }
+}
+
+.mobileMenuItemActive { color: var(--util-accent); }
+
+.mobileMenuLabel { flex: 1; text-align: left; }
+
+.mobileMenuIcon {
+  align-items: center;
+  display: flex;
+  font-size: $text-base;
+  font-weight: 700;
+  justify-content: center;
+  min-width: 28px;
 }
 
 .fab {
