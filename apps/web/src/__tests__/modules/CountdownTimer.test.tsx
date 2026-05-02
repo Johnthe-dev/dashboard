@@ -11,7 +11,7 @@ import { CountdownTimer } from '../../components/modules/CountdownTimer/Countdow
 function renderTimer(moduleId: string) {
   return render(
     <WebPersistenceProvider>
-      <CountdownTimer moduleId={moduleId} />
+      <CountdownTimer moduleId={moduleId} themeId="sticky-yellow" />
     </WebPersistenceProvider>,
   )
 }
