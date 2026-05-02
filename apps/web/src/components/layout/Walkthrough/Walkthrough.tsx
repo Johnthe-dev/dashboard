@@ -225,7 +225,7 @@ export function Walkthrough() {
 
   return createPortal(
     <>
-      <div className={styles.overlay} aria-hidden="true" />
+      <div className={styles.overlay} aria-hidden="true" onClick={finish} />
 
       {spotRect && (
         <div

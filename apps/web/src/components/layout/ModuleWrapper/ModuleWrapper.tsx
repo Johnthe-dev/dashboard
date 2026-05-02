@@ -32,6 +32,7 @@ export function ModuleWrapper({
         <span className={styles.dragIndicator}>⠿</span>
         <span className={styles.title}>{title}</span>
         <div className={styles.headerActions}>
+          {/* Desktop: split-swatch dot + ✕ */}
           <button
             className={styles.themeToggle}
             onClick={() => setShowThemes((v) => !v)}
@@ -51,6 +52,15 @@ export function ModuleWrapper({
           >
             ✕
           </button>
+          {/* Mobile: single gear button that opens theme + delete panel */}
+          <button
+            className={styles.gearBtn}
+            onClick={() => setShowThemes((v) => !v)}
+            aria-label="Module options"
+            aria-expanded={showThemes}
+          >
+            ⚙
+          </button>
         </div>
       </div>
 
@@ -69,6 +79,14 @@ export function ModuleWrapper({
               aria-label={theme.label}
             />
           ))}
+          {/* Delete option — mobile only, shown inside the gear panel */}
+          <button
+            className={styles.themePickerDelete}
+            onClick={() => { setShowThemes(false); onRemove() }}
+            aria-label="Remove module"
+          >
+            ✕ Remove
+          </button>
         </div>
       )}
 
