@@ -1,0 +1,56 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: # allow manual runs from the Actions tab
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build:web
+        env:
+          # Sets Vite's base path to /repo-name/ so all asset URLs are correct
+          # on the github.io subdomain (e.g. https://john.github.io/focal/)
+          BASE_URL: /${{ github.event.repository.name }}/
+
+      # GitHub Pages 404.html trick — serves the SPA for any unknown path so
+      # TanStack Router can handle client-side routes like /utilities/json
+      - name: Copy index.html → 404.html for SPA routing
+        run: cp apps/web/dist/index.html apps/web/dist/404.html
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: apps/web/dist
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
